@@ -2,14 +2,14 @@
 #include<string>
 using namespace std;
 
-int matchingstring(string s1,string s2){
+int matchingstring(string haystack,string needle){
 
-    int m = s1.length();
-    int n = s2.length();
+    int m = haystack.length();
+    int n = needle.length();
 
     for(int i=0;i<=m-n;i++){
         for(int j=0;i<n;j++){
-            if(s1[i+j]!=s2[j]){
+            if(haystack[i+j]!=needle[j]){
                 break;
             }
             if(j==n-1){
@@ -20,9 +20,9 @@ int matchingstring(string s1,string s2){
     return -1;
 }
 int main(){
-    string s1="sadofsad";
-    string s2 = "sad";
-    cout<<matchingstring(s1,s2);
+    string haystack="sadofsad";
+    string needle = "sad";
+    cout<<matchingstring(haystack,needle);
 }
 
 
