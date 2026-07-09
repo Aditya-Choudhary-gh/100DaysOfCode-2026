@@ -1,31 +1,37 @@
-//Need to check if the number eventually becomes 1
+//Need to count how many triplets can form a valid triangle
 
-import java.util.HashSet;
+import java.util.Arrays;
 
 class Solution {
 
-    public boolean isHappy(int n) {
+    public int triangleNumber(int[] nums) {
 
-        HashSet<Integer> seen = new HashSet<>();
+        Arrays.sort(nums);
 
-        // if a number repeats, we're stuck in a loop
-        while (n != 1 && !seen.contains(n)) {
+        int count = 0;
 
-            seen.add(n);
+        // fix the largest side first
+        for (int i = nums.length - 1; i >= 2; i--) {
 
-            int sum = 0;
+            int left = 0;
+            int right = i - 1;
 
-            // keep adding squares of digits
-            while (n > 0) {
+            while (left < right) {
 
-                int digit = n % 10;
-                sum += digit * digit;
-                n /= 10;
+                // if these three can make a triangle,
+                // everything between left and right can too
+                if (nums[left] + nums[right] > nums[i]) {
+
+                    count += right - left;
+                    right--;
+
+                } else {
+
+                    left++;
+                }
             }
-
-            n = sum;
         }
 
-        return n == 1;
+        return count;
     }
 }

@@ -1,4 +1,4 @@
-//Need to return the squares in sorted order
+//Need to check if any pair adds up to the target
 
 #include <iostream>
 #include <vector>
@@ -6,39 +6,34 @@ using namespace std;
 
 int main()
 {
-    vector<int> nums = {-4, -1, 0, 3, 10};
+    vector<int> nums = {1, 2, 4, 6, 10};
+    int target = 8;
 
     int left = 0;
     int right = nums.size() - 1;
 
-    vector<int> ans(nums.size());
-
-    int index = nums.size() - 1;
-
-    // bigger square will always come from one of the ends
-    while (left <= right)
+    // keep moving towards the target
+    while (left < right)
     {
-        int leftSquare = nums[left] * nums[left];
-        int rightSquare = nums[right] * nums[right];
+        int sum = nums[left] + nums[right];
 
-        if (leftSquare > rightSquare)
+        if (sum == target)
         {
-            ans[index] = leftSquare;
+            cout << "true";
+            return 0;
+        }
+
+        if (sum < target)
+        {
             left++;
         }
         else
         {
-            ans[index] = rightSquare;
             right--;
         }
-
-        index--;
     }
 
-    for (int num : ans)
-    {
-        cout << num << " ";
-    }
+    cout << "false";
 
     return 0;
 }
